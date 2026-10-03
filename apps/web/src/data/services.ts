@@ -13,6 +13,12 @@ export const services: Service[] = [
     groupId: 'electricidad',
     image: '/assets/images/galeria/inicio/alternadores/img1.jpg',
   },
+  {
+    id: '20',
+    name: 'Diagnóstico eléctrico',
+    groupId: 'electricidad',
+    image: '/assets/images/galeria/inicio/alternadores/img3.jpg',
+  },
   // Llaves y sistemas de seguridad
   {
     id: '6',
@@ -61,6 +67,12 @@ export const services: Service[] = [
     name: 'Mantenimiento de chapas de arranque',
     groupId: 'llaves-seguridad',
     image: '/assets/images/galeria/inicio/mantenimiento-chapas-arranque/img1.jpg',
+  },
+  {
+    id: '21',
+    name: 'Llaves de alta seguridad',
+    groupId: 'llaves-seguridad',
+    image: '/assets/images/galeria/inicio/duplicados-de-llaves/img4.jpg',
   },
   // Instalaciones
   {

@@ -77,7 +77,7 @@ export const Footer = () => {
       {/* COPYRIGHT */}
       <div className="border-t border-border py-6 px-8">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-text-secondary text-sm font-body">© 2024 Multiservicios Muños y Aliga. Todos los derechos reservados.</p>
+          <p className="text-text-secondary text-sm font-body">© 2026 Multiservicios Muños y Aliga. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
