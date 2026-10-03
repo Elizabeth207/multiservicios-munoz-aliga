@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap - Actualizar TUDOMINIO.com cuando se compre el dominio real
+Sitemap: https://TUDOMINIO.com/sitemap.xml

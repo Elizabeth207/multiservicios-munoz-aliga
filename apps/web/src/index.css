@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0d1b2e;
+  --color-surface: #1E5A9C;
+  --color-surface-light: #3E8FD6;
+  --color-border: #7FC4F2;
+  --color-primary: #7FC4F2;
+  --color-secondary: #3E8FD6;
+  --color-text: #EAF6FF;
+  --color-text-secondary: #BFE3FA;
+  --color-whatsapp: #128c7e;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(127, 196, 242, 0.5); }
+  100% { box-shadow: 0 0 20px rgba(127, 196, 242, 0.8), 0 0 30px rgba(127, 196, 242, 0.6); }
+}
+
+.animate-ken-burns {
+  animation: kenBurns 20s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@layer base {
+  html {
+    background-color: #0d1b2e;
+    color: #EAF6FF;
+  }
+
+  body {
+    background-color: #0d1b2e;
+    color: #EAF6FF;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
