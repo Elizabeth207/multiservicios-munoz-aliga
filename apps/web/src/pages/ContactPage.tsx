@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { ContactForm } from '../components/contact/ContactForm';
 import { ContactInfo } from '../components/contact/ContactInfo';
 import { MapEmbed } from '../components/contact/MapEmbed';
 import { PageSeo } from '../lib/seo';
 
 export const ContactPage = () => {
+  const [imageError, setImageError] = useState(false);
+
   return (
     <>
       <PageSeo
@@ -11,9 +14,32 @@ export const ContactPage = () => {
         description="Contáctanos por WhatsApp o visita nuestro taller en Huancayo, El Tambo, Junín. Solicita cotizaciones, agenda servicios o resuelve tus dudas sobre productos automotrices."
         keywords="contacto, WhatsApp, taller automotriz, Huancayo, El Tambo, Junín"
       />
+      
+      {/* Banner de portada */}
+      <div className="relative h-48 overflow-hidden">
+        {!imageError ? (
+          <img
+            src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=1920&auto=format&fit=crop"
+            alt="Atención automotriz"
+            className="absolute inset-0 w-full h-full object-cover"
+            onError={() => setImageError(true)}
+          />
+        ) : null}
+        <div 
+          className="absolute inset-0 bg-gradient-to-r from-background/90 to-background/60"
+          style={{
+            background: imageError 
+              ? 'linear-gradient(135deg, #0d1b2e 0%, #3E8FD6 100%)'
+              : undefined
+          }}
+        />
+        <div className="relative z-10 flex items-center h-full px-8">
+          <h1 className="text-4xl md:text-5xl font-bold font-heading text-text" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.6)' }}>Contacto</h1>
+        </div>
+      </div>
+
       <div className="p-8 bg-background min-h-screen">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8 font-heading text-text">Contacto</h1>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="space-y-8">
               <ContactForm />

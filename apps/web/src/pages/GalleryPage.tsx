@@ -7,6 +7,7 @@ import { PageSeo } from '../lib/seo';
 
 export const GalleryPage = () => {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
+  const [imageError, setImageError] = useState(false);
 
   return (
     <>
@@ -15,13 +16,35 @@ export const GalleryPage = () => {
         description="Galería de trabajos realizados por Multiservicios Muños y Aliga en Huancayo. Mira nuestras instalaciones de alarmas, GPS, electricidad automotriz y más."
         keywords="galería trabajos, taller automotriz, instalaciones, Huancayo"
       />
+      
+      {/* Banner de portada */}
+      <div className="relative h-48 overflow-hidden">
+        {!imageError ? (
+          <img
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1920&auto=format&fit=crop"
+            alt="Herramientas automotrices"
+            className="absolute inset-0 w-full h-full object-cover"
+            onError={() => setImageError(true)}
+          />
+        ) : null}
+        <div 
+          className="absolute inset-0 bg-gradient-to-r from-background/90 to-background/60"
+          style={{
+            background: imageError 
+              ? 'linear-gradient(135deg, #0d1b2e 0%, #1E5A9C 100%)'
+              : undefined
+          }}
+        />
+        <div className="relative z-10 flex items-center h-full px-8">
+          <h1 className="text-4xl md:text-5xl font-bold font-heading text-text" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.6)' }}>Galería de Trabajos</h1>
+        </div>
+      </div>
+
       <div className="p-8 bg-background min-h-screen">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold mb-4 font-heading text-text">Galería de Trabajos</h1>
-          <div className="bg-primary/20 border border-primary text-text-secondary px-4 py-3 rounded mb-8">
-            <p className="font-semibold font-heading text-primary">Galería en construcción</p>
-            <p className="text-sm font-body">Las fotografías reales del taller y trabajos se agregarán próximamente.</p>
-          </div>
+          <p className="text-lg text-text-secondary mb-8 font-body leading-relaxed">
+            Conoce de cerca el trabajo que hacemos: instalaciones, reparaciones y soluciones reales para tu vehículo.
+          </p>
           <GalleryGrid items={galleryItems} onImageClick={setSelectedItem} />
           <GalleryLightbox item={selectedItem} onClose={() => setSelectedItem(null)} />
         </div>
