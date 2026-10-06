@@ -10,8 +10,8 @@ export const AboutPage = () => {
     <>
       <PageSeo
         title="Sobre nosotros"
-        description="Conoce a Multiservicios Muños y Aliga, tu taller automotriz de confianza en Huancayo, El Tambo. Ofrecemos atención personalizada y trabajo de calidad para tu vehículo."
-        keywords="taller automotriz, Huancayo, El Tambo, Multiservicios Muños y Aliga"
+        description="Conoce a Multiservicios Muños, tu taller automotriz de confianza en Huancayo, El Tambo. Ofrecemos atención personalizada y trabajo de calidad para tu vehículo."
+        keywords="taller automotriz, Huancayo, El Tambo, Multiservicios Muños"
       />
       {/* Banner */}
       <div className="relative h-48 overflow-hidden">

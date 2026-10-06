@@ -43,7 +43,7 @@ export const Footer = () => {
                 </tr>
                 <tr>
                   <td className="py-2 text-text-secondary font-body">Dom</td>
-                  <td className="py-2 text-text-secondary font-body text-right">Cerrado</td>
+                  <td className="py-2 text-text font-body text-right">9:00am – 6:30pm</td>
                 </tr>
               </tbody>
             </table>
@@ -77,7 +77,7 @@ export const Footer = () => {
       {/* COPYRIGHT */}
       <div className="border-t border-border py-6 px-8">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-text-secondary text-sm font-body">© 2026 Multiservicios Muños y Aliga. Todos los derechos reservados.</p>
+          <p className="text-text-secondary text-sm font-body">© 2026 Multiservicios Muños. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

@@ -13,7 +13,7 @@ export const GalleryPage = () => {
     <>
       <PageSeo
         title="Galería de trabajos"
-        description="Galería de trabajos realizados por Multiservicios Muños y Aliga en Huancayo. Mira nuestras instalaciones de alarmas, GPS, electricidad automotriz y más."
+        description="Galería de trabajos realizados por Multiservicios Muños en Huancayo. Mira nuestras instalaciones de alarmas, GPS, electricidad automotriz y más."
         keywords="galería trabajos, taller automotriz, instalaciones, Huancayo"
       />
       

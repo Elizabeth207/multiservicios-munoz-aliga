@@ -49,7 +49,7 @@ export const AboutSection = () => {
         {/* Bloque 1: Imagen izquierda, texto derecha */}
         <AboutBlock
           title="¿Quiénes somos?"
-          content="En Multiservicios Muños y Aliga ofrecemos soluciones integrales para vehículos, combinando productos, instalación, programación y reparación para brindar a nuestros clientes un servicio completo y confiable."
+          content="En Multiservicios Muños ofrecemos soluciones integrales para vehículos, combinando productos, instalación, programación y reparación para brindar a nuestros clientes un servicio completo y confiable."
           imageUrl="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=1920&auto=format&fit=crop"
           imageAlt="Mecánico trabajando en motor"
           imageLeft={true}

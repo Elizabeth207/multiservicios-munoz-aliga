@@ -25,7 +25,7 @@ export const Header = () => {
         <div className="flex items-center gap-2">
           <BrandIcon className="w-6 h-6 text-primary" />
           <h1 className="text-lg md:text-xl font-bold font-heading text-text tracking-tight truncate">
-            Multiservicios Muños y Aliga
+            Multiservicios Muños
           </h1>
         </div>
         

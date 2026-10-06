@@ -10,7 +10,7 @@ export const HomePage = () => {
     <>
       <PageSeo
         title="Inicio"
-        description="Multiservicios Muños y Aliga en Huancayo ofrece soluciones integrales para tu vehículo: electricidad automotriz, llaves y sistemas de seguridad, instalaciones de alarmas, GPS, pantallas y más."
+        description="Multiservicios Muños en Huancayo ofrece soluciones integrales para tu vehículo: electricidad automotriz, llaves y sistemas de seguridad, instalaciones de alarmas, GPS, pantallas y más."
         keywords="electricidad automotriz, llaves vehículos, alarmas, GPS, Huancayo, Junín"
       />
       <div className="min-h-screen">
