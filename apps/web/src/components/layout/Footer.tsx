@@ -1,84 +1,77 @@
 import { siteConfig } from '../../data/siteConfig';
 import { SocialIcons } from '../common/SocialIcons';
-import { buildWhatsAppLink } from '../../lib/whatsapp';
-import { MessageCircle, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { categories } from '../../data/categories';
+import { MapPin, Clock } from 'lucide-react';
+import { WhatsAppCTA } from '../ui/WhatsAppCTA';
 
 export const Footer = () => {
-  const handleWhatsAppClick = () => {
-    window.open(buildWhatsAppLink(), '_blank');
-  };
-
   return (
-    <footer className="bg-background border-t border-border">
-      {/* BLOQUE SUPERIOR */}
-      <div className="bg-surface border-b border-border py-6 px-8">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 justify-center md:justify-start">
-          <button
-            onClick={handleWhatsAppClick}
-            className="flex items-center gap-3 text-text hover:text-primary transition-colors font-body"
-          >
-            <MessageCircle className="w-5 h-5 text-whatsapp" />
-            <span className="font-medium">Agenda tu cita ahora</span>
-          </button>
-          <div className="flex items-center gap-3 text-text-secondary font-body">
-            <MapPin className="w-5 h-5 text-secondary" />
-            <span>{siteConfig.address}</span>
+    <footer className="bg-carbon text-text border-t border-border">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <p className="font-bold font-heading text-lg mb-3">{siteConfig.businessName}</p>
+          <p className="text-sm text-text-secondary font-body leading-relaxed">
+            Electricidad, llaves, seguridad e instalaciones para tu vehículo en Huancayo.
+          </p>
+          <div className="mt-4">
+            <WhatsAppCTA size="sm" label="WhatsApp" />
           </div>
+        </div>
+
+        <div>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-accent mb-4 font-body">Navegación</h3>
+          <ul className="space-y-2 text-sm font-body">
+            {[
+              { to: '/productos', label: 'Productos' },
+              { to: '/servicios', label: 'Servicios' },
+              { to: '/galeria', label: 'Galería' },
+              { to: '/contacto', label: 'Contacto' },
+            ].map((item) => (
+              <li key={item.to}>
+                <Link to={item.to} className="text-text-secondary hover:text-accent motion-safe:transition-colors">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-accent mb-4 font-body">Especialidades</h3>
+          <ul className="space-y-2 text-sm font-body">
+            {categories.map((category) => (
+              <li key={category.id}>
+                <Link
+                  to="/productos"
+                  className="text-text-secondary hover:text-accent motion-safe:transition-colors"
+                >
+                  {category.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-accent mb-4 font-body">Ubicación</h3>
+          <p className="flex items-start gap-2 text-sm text-text-secondary font-body mb-3">
+            <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" aria-hidden />
+            {siteConfig.address}
+          </p>
+          <p className="flex items-start gap-2 text-sm text-text-secondary font-body mb-4">
+            <Clock className="w-4 h-4 text-accent shrink-0 mt-0.5" aria-hidden />
+            {siteConfig.hours}
+          </p>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-accent mb-3 font-body">Redes</h3>
+          <SocialIcons />
         </div>
       </div>
 
-      {/* BLOQUE INFERIOR */}
-      <div className="py-12 px-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* HORARIO */}
-          <div>
-            <h3 className="text-lg font-bold font-heading text-text mb-4">HORARIO</h3>
-            <table className="w-full text-sm">
-              <tbody>
-                <tr className="border-b border-border">
-                  <td className="py-2 text-text-secondary font-body">Lun – Sáb</td>
-                  <td className="py-2 text-text font-body text-right">9:00am – 6:30pm</td>
-                </tr>
-                <tr>
-                  <td className="py-2 text-text-secondary font-body">Dom</td>
-                  <td className="py-2 text-text font-body text-right">9:00am – 6:30pm</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          {/* SERVICIOS */}
-          <div>
-            <h3 className="text-lg font-bold font-heading text-text mb-4">SERVICIOS</h3>
-            <ul className="space-y-2 text-sm">
-              {categories.map((category) => (
-                <li key={category.id}>
-                  <Link
-                    to="/servicios"
-                    className="text-text-secondary hover:text-primary transition-colors font-body"
-                  >
-                    {category.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* NUESTRAS REDES */}
-          <div>
-            <h3 className="text-lg font-bold font-heading text-text mb-4">NUESTRAS REDES</h3>
-            <SocialIcons />
-          </div>
-        </div>
-      </div>
-
-      {/* COPYRIGHT */}
-      <div className="border-t border-border py-6 px-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-text-secondary text-sm font-body">© 2026 Multiservicios Muños. Todos los derechos reservados.</p>
-        </div>
+      <div className="border-t border-border py-6 px-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] lg:pb-6 text-center">
+        <p className="text-text-secondary text-sm font-body">
+          © {new Date().getFullYear()} {siteConfig.businessName}. Todos los derechos reservados.
+        </p>
       </div>
     </footer>
   );

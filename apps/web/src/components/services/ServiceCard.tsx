@@ -1,48 +1,64 @@
 import type { Service } from '../../types/service';
 import { buildWhatsAppLink } from '../../lib/whatsapp';
-import { Zap, Key, Wrench } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { getServiceIcon } from '../../lib/automotiveIcons';
+import { ResponsiveImage } from '../ui/ResponsiveImage';
+import { PrimaryButton } from '../ui/PrimaryButton';
+import { IconBadge } from '../ui/IconBadge';
 
 interface ServiceCardProps {
   service: Service;
+  variant?: 'default' | 'horizontal';
 }
 
-const groupIcons: Record<string, LucideIcon> = {
-  'electricidad': Zap,
-  'llaves-seguridad': Key,
-  'instalaciones': Wrench,
-};
-
-export const ServiceCard = ({ service }: ServiceCardProps) => {
+export const ServiceCard = ({ service, variant = 'default' }: ServiceCardProps) => {
   const handleWhatsAppClick = () => {
-    const message = `Hola, quisiera consultar por el servicio: ${service.name}`;
-    window.open(buildWhatsAppLink(message), '_blank');
+    window.open(
+      buildWhatsAppLink(`Hola, quisiera consultar por el servicio: ${service.name}`),
+      '_blank',
+      'noopener,noreferrer'
+    );
   };
 
-  const IconComponent = groupIcons[service.groupId] || Wrench;
+  if (variant === 'horizontal') {
+    return (
+      <article className="card-light group grid sm:grid-cols-[200px_1fr] gap-0 overflow-hidden">
+        {service.image && (
+          <ResponsiveImage
+            src={service.image}
+            alt={service.name}
+            aspectClass="aspect-[4/3] sm:aspect-auto sm:h-full min-h-[160px]"
+            className="rounded-none sm:rounded-l-xl"
+          />
+        )}
+        <div className="p-5 flex flex-col justify-center">
+          <IconBadge icon={getServiceIcon(service.name, service.groupId)} size="md" className="mb-2" />
+          <h3 className="font-bold text-lg font-heading text-ink">{service.name}</h3>
+          {service.description && (
+            <p className="text-sm text-muted font-body mt-1">{service.description}</p>
+          )}
+          <PrimaryButton variant="whatsapp" size="sm" className="mt-4 w-fit" onClick={handleWhatsAppClick}>
+            Cotizar servicio
+          </PrimaryButton>
+        </div>
+      </article>
+    );
+  }
 
   return (
-    <div className="relative bg-gradient-to-br from-surface to-[#16416e] rounded-lg p-4 flex flex-col gap-2 shadow-2xl shadow-black/35 hover:shadow-primary/40 transition-all duration-500 hover:-translate-y-2 border-t border-surface-light">
-      <div className="absolute top-3 right-3 bg-primary/20 p-2 rounded-full backdrop-blur-sm">
-        <IconComponent className="w-5 h-5 text-primary" />
-      </div>
+    <article className="card-light group flex flex-col overflow-hidden h-full">
       {service.image && (
-        <img 
-          src={service.image} 
-          alt={service.name} 
-          className="w-full h-48 object-cover rounded bg-background transition-transform duration-500 hover:scale-105"
-        />
+        <ResponsiveImage src={service.image} alt={service.name} aspectClass="aspect-[16/10]" />
       )}
-      <h3 className="font-semibold text-lg font-heading text-text">{service.name}</h3>
-      {service.description && (
-        <p className="text-sm text-text-secondary mt-1 font-body">{service.description}</p>
-      )}
-      <button 
-        onClick={handleWhatsAppClick}
-        className="mt-auto bg-secondary text-text px-4 py-2 rounded hover:bg-primary transition-all duration-300 font-medium font-body shadow-lg shadow-black/30 hover:shadow-primary/50 hover:scale-105"
-      >
-        Consultar por WhatsApp
-      </button>
-    </div>
+      <div className="p-5 flex flex-col flex-1">
+        <IconBadge icon={getServiceIcon(service.name, service.groupId)} size="md" className="mb-2" />
+        <h3 className="font-bold text-lg font-heading text-ink">{service.name}</h3>
+        {service.description && (
+          <p className="text-sm text-muted font-body mt-1 flex-1">{service.description}</p>
+        )}
+        <PrimaryButton variant="whatsapp" size="sm" className="w-full mt-4" onClick={handleWhatsAppClick}>
+          Cotizar servicio
+        </PrimaryButton>
+      </div>
+    </article>
   );
 };

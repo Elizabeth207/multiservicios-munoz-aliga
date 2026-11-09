@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { ContactFormData } from '../../types/contactForm';
+import { PrimaryButton } from '../ui/PrimaryButton';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mgavkgbv';
 
@@ -22,7 +23,7 @@ export const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.phone) {
       setErrorMessage('Nombre y teléfono son obligatorios');
       setSubmitStatus('error');
@@ -38,7 +39,7 @@ export const ContactForm = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -57,9 +58,14 @@ export const ContactForm = () => {
         });
       } else {
         setSubmitStatus('error');
-        const errorMsg = data.errors && data.errors.length > 0
-          ? data.errors.map((e: { field?: string; message: string }) => e.field ? `${e.field}: ${e.message}` : e.message).join(', ')
-          : 'Error al enviar el formulario';
+        const errorMsg =
+          data.errors && data.errors.length > 0
+            ? data.errors
+                .map((err: { field?: string; message: string }) =>
+                  err.field ? `${err.field}: ${err.message}` : err.message
+                )
+                .join(', ')
+            : 'Error al enviar el formulario';
         setErrorMessage(errorMsg);
       }
     } catch (err) {
@@ -71,120 +77,66 @@ export const ContactForm = () => {
     }
   };
 
+  const inputClass =
+    'w-full bg-surface-light border border-border-light rounded-lg px-3 py-2.5 text-ink focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none font-body text-sm';
+
   return (
-    <div className="bg-surface border border-border rounded-lg p-6 shadow-sm">
-      <h2 className="text-2xl font-bold mb-6 font-heading text-text">Solicitar Cotización</h2>
-      
+    <div className="card-light p-6 md:p-8">
+      <h2 className="text-2xl font-bold mb-2 font-heading text-ink">Solicitar cotización</h2>
+      <p className="text-sm text-muted font-body mb-6">Completa el formulario y te contactaremos.</p>
+
       {submitStatus === 'success' && (
-        <div className="bg-green-900/20 border border-green-800 text-green-100 px-4 py-3 rounded mb-4">
-          ¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.
+        <div className="bg-whatsapp/10 border border-whatsapp/30 text-ink px-4 py-3 rounded-lg mb-4 font-body text-sm" role="status">
+          ¡Mensaje enviado! Nos pondremos en contacto contigo pronto.
         </div>
       )}
 
       {submitStatus === 'error' && (
-        <div className="bg-red-900/20 border border-red-800 text-red-100 px-4 py-3 rounded mb-4">
+        <div className="bg-red-50 border border-red-200 text-red-900 px-4 py-3 rounded-lg mb-4 font-body text-sm" role="alert">
           {errorMessage}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium mb-1 font-heading text-text">
+          <label htmlFor="name" className="block text-sm font-medium mb-1 font-body text-ink">
             Nombre *
           </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full bg-background border border-border rounded px-3 py-2 text-text focus:border-primary focus:outline-none transition-colors font-body"
-            required
-          />
+          <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className={inputClass} required />
         </div>
-
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium mb-1 font-heading text-text">
+          <label htmlFor="phone" className="block text-sm font-medium mb-1 font-body text-ink">
             Teléfono *
           </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full bg-background border border-border rounded px-3 py-2 text-text focus:border-primary focus:outline-none transition-colors font-body"
-            required
-          />
+          <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} className={inputClass} required />
         </div>
-
         <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1 font-heading text-text">
-            Correo electrónico (opcional)
+          <label htmlFor="email" className="block text-sm font-medium mb-1 font-body text-ink">
+            Correo (opcional)
           </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email || ''}
-            onChange={handleChange}
-            className="w-full bg-background border border-border rounded px-3 py-2 text-text focus:border-primary focus:outline-none transition-colors font-body"
-            placeholder="tucorreo@ejemplo.com"
-          />
+          <input type="email" id="email" name="email" value={formData.email || ''} onChange={handleChange} className={inputClass} />
         </div>
-
         <div>
-          <label htmlFor="vehicleType" className="block text-sm font-medium mb-1 font-heading text-text">
+          <label htmlFor="vehicleType" className="block text-sm font-medium mb-1 font-body text-ink">
             Tipo de vehículo
           </label>
-          <input
-            type="text"
-            id="vehicleType"
-            name="vehicleType"
-            value={formData.vehicleType}
-            onChange={handleChange}
-            className="w-full bg-background border border-border rounded px-3 py-2 text-text focus:border-primary focus:outline-none transition-colors font-body"
-            placeholder="Ej: Toyota Corolla 2020"
-          />
+          <input type="text" id="vehicleType" name="vehicleType" value={formData.vehicleType} onChange={handleChange} className={inputClass} placeholder="Ej: Toyota Corolla 2020" />
         </div>
-
         <div>
-          <label htmlFor="service" className="block text-sm font-medium mb-1 font-heading text-text">
+          <label htmlFor="service" className="block text-sm font-medium mb-1 font-body text-ink">
             Servicio de interés
           </label>
-          <input
-            type="text"
-            id="service"
-            name="service"
-            value={formData.service}
-            onChange={handleChange}
-            className="w-full bg-background border border-border rounded px-3 py-2 text-text focus:border-primary focus:outline-none transition-colors font-body"
-            placeholder="Ej: Instalación de alarma"
-          />
+          <input type="text" id="service" name="service" value={formData.service} onChange={handleChange} className={inputClass} />
         </div>
-
         <div>
-          <label htmlFor="message" className="block text-sm font-medium mb-1 font-heading text-text">
+          <label htmlFor="message" className="block text-sm font-medium mb-1 font-body text-ink">
             Mensaje
           </label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows={4}
-            className="w-full bg-background border border-border rounded px-3 py-2 text-text focus:border-primary focus:outline-none transition-colors font-body"
-            placeholder="Describe tu consulta o requerimiento..."
-          />
+          <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={4} className={inputClass} />
         </div>
-
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-primary text-background py-3 rounded hover:bg-primary/90 transition-colors disabled:bg-surface disabled:text-text-secondary disabled:cursor-not-allowed font-semibold font-body shadow-lg shadow-primary/20"
-        >
-          {isLoading ? 'Enviando...' : 'Solicitar cotización'}
-        </button>
+        <PrimaryButton type="submit" disabled={isLoading} className="w-full">
+          {isLoading ? 'Enviando…' : 'Enviar solicitud'}
+        </PrimaryButton>
       </form>
     </div>
   );

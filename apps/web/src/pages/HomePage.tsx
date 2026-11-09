@@ -1,8 +1,12 @@
-import { Hero } from '../components/home/Hero';
+import { siteConfig } from '../data/siteConfig';
+import { PageHero } from '../components/ui/PageHero';
+import { HomeIntro } from '../components/home/HomeIntro';
 import { ServicesSummary } from '../components/home/ServicesSummary';
+import { HomeFeaturedServices } from '../components/home/HomeFeaturedServices';
 import { FeaturedProducts } from '../components/home/FeaturedProducts';
+import { HomeGalleryPreview } from '../components/home/HomeGalleryPreview';
 import { WhyChooseUs } from '../components/home/WhyChooseUs';
-import { QuickContactAccess } from '../components/home/QuickContactAccess';
+import { ContactCTA } from '../components/ui/ContactCTA';
 import { PageSeo } from '../lib/seo';
 
 export const HomePage = () => {
@@ -10,18 +14,23 @@ export const HomePage = () => {
     <>
       <PageSeo
         title="Inicio"
-        description="Multiservicios Muños en Huancayo ofrece soluciones integrales para tu vehículo: electricidad automotriz, llaves y sistemas de seguridad, instalaciones de alarmas, GPS, pantallas y más."
+        description="Multiservicios Muñoz y Aliga en Huancayo: electricidad automotriz, llaves, alarmas, GPS, pantallas y más para tu vehículo."
         keywords="electricidad automotriz, llaves vehículos, alarmas, GPS, Huancayo, Junín"
       />
-      <div className="min-h-screen">
-        <Hero />
-        <ServicesSummary />
-        <div className="bg-gradient-to-b from-surface/20 to-background">
-          <FeaturedProducts />
-        </div>
-        <WhyChooseUs />
-        <QuickContactAccess />
-      </div>
+      <PageHero
+        variant="split"
+        title={siteConfig.businessName}
+        subtitle="Soluciones integrales para tu vehículo: electricidad, llaves, seguridad e instalaciones con atención en Huancayo."
+        showDefaultCtas
+        imageAlt="Técnico trabajando en vehículo"
+      />
+      <HomeIntro />
+      <ServicesSummary />
+      <HomeFeaturedServices />
+      <FeaturedProducts />
+      <HomeGalleryPreview />
+      <WhyChooseUs />
+      <ContactCTA />
     </>
   );
 };

@@ -1,38 +1,41 @@
-import { UserCheck, Wrench, ShieldCheck, Zap, Car, Clock } from 'lucide-react';
-import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { UserCheck, Wrench, Package, ShieldCheck, CarFront, Clock } from 'lucide-react';
+import { AnimatedSection } from '../ui/AnimatedSection';
+import { SectionHeading } from '../ui/SectionHeading';
+
+const reasons = [
+  { text: 'Atención personalizada', icon: UserCheck },
+  { text: 'Trabajo técnico especializado', icon: Wrench },
+  { text: 'Amplia variedad de productos', icon: Package },
+  { text: 'Seguridad e instalaciones profesionales', icon: ShieldCheck },
+  { text: 'Soluciones para distintos vehículos', icon: CarFront },
+  { text: 'Respuesta ágil por WhatsApp', icon: Clock },
+];
 
 export const WhyChooseUs = () => {
-  const { ref, isVisible } = useScrollReveal();
-
-  const reasons = [
-    { text: 'Atención personalizada', icon: UserCheck },
-    { text: 'Experiencia en el sector automotriz', icon: Wrench },
-    { text: 'Amplia variedad de productos', icon: Car },
-    { text: 'Servicios especializados', icon: ShieldCheck },
-    { text: 'Soluciones para diferentes tipos de vehículos', icon: Car },
-    { text: 'Trabajo personalizado', icon: Zap },
-    { text: 'Atención rápida y directa', icon: Clock },
-  ];
-
   return (
-    <div 
-      ref={ref}
-      className={`py-16 px-8 bg-background ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-    >
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center font-heading text-text">¿Por qué elegirnos?</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {reasons.map((reason, index) => {
+    <AnimatedSection className="section-light py-16 md:py-20 px-6 md:px-10 border-t border-border-light">
+      <div className="max-w-7xl mx-auto">
+        <SectionHeading
+          eyebrow="Confianza"
+          title="¿Por qué elegirnos?"
+          description="Beneficios verificables de nuestro servicio en Huancayo."
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {reasons.map((reason) => {
             const Icon = reason.icon;
             return (
-              <div key={index} className="flex items-center gap-3 bg-surface border border-border rounded-lg p-4 hover:border-primary hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-1">
-                <Icon className="w-5 h-5 text-secondary flex-shrink-0" />
-                <span className="text-text-secondary font-body">{reason.text}</span>
+              <div key={reason.text} className="card-premium">
+                <div className="card-premium-inner flex items-center gap-4 p-5 w-full">
+                  <span className="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center shrink-0 ring-1 ring-accent/15">
+                    <Icon className="w-5 h-5 text-accent" strokeWidth={1.75} aria-hidden />
+                  </span>
+                  <span className="text-ink font-medium font-body">{reason.text}</span>
+                </div>
               </div>
             );
           })}
         </div>
       </div>
-    </div>
+    </AnimatedSection>
   );
 };

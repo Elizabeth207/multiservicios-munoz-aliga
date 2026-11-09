@@ -8,7 +8,7 @@ export const WhatsAppFloatButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-6 right-6 bg-[#128c7e] text-white p-4 rounded-full shadow-lg hover:bg-[#075e54] transition-colors z-50"
+      className="hidden lg:flex fixed bottom-6 right-6 bg-whatsapp text-white p-4 rounded-full shadow-lg shadow-whatsapp/35 hover:bg-whatsapp-dark motion-safe:transition-all hover:scale-105 active:scale-95 z-40 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
       aria-label="Contactar por WhatsApp"
     >
       <svg

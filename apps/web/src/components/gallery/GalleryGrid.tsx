@@ -1,39 +1,69 @@
 import type { GalleryItem } from '../../data/gallery';
+import { ResponsiveImage } from '../ui/ResponsiveImage';
 
 interface GalleryGridProps {
   items: GalleryItem[];
   onImageClick: (item: GalleryItem) => void;
+  mosaic?: boolean;
 }
 
-export const GalleryGrid = ({ items, onImageClick }: GalleryGridProps) => {
+export const GalleryGrid = ({ items, onImageClick, mosaic = false }: GalleryGridProps) => {
+  if (!mosaic) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {items.map((item) => (
+          <GalleryTile key={item.id} item={item} onImageClick={onImageClick} />
+        ))}
+      </div>
+    );
+  }
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {items.map((item) => (
-        <div
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[140px] md:auto-rows-[180px]">
+      {items.map((item, index) => (
+        <button
           key={item.id}
-          className="relative bg-gradient-to-br from-surface to-[#16416e] rounded-lg overflow-hidden cursor-pointer shadow-2xl shadow-black/35 hover:shadow-primary/40 transition-all duration-500 hover:-translate-y-2 border-t border-surface-light group"
+          type="button"
           onClick={() => onImageClick(item)}
+          className={`group text-left rounded-xl overflow-hidden focus-visible:ring-2 focus-visible:ring-accent
+            ${index % 7 === 0 ? 'col-span-2 row-span-2' : ''}`}
         >
-          <div className="relative">
-            <img
+          <div className="relative h-full min-h-[inherit]">
+            <ResponsiveImage
               src={item.imageSrc}
               alt={item.caption}
-              className="w-full h-48 object-cover bg-background group-hover:opacity-90 transition-opacity"
-              onError={(e) => {
-                console.error('Image load error:', item.imageSrc);
-                e.currentTarget.src = '/assets/images/placeholders/producto-generico.svg';
-              }}
+              aspectClass="h-full min-h-[140px] aspect-auto"
+              className="h-full rounded-none"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center">
-              <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity font-semibold font-heading">Ver más</span>
+            <div className="absolute inset-0 bg-carbon/40 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 motion-safe:transition-opacity flex items-end p-3">
+              <div>
+                <p className="text-white text-sm font-medium font-body line-clamp-2">{item.caption}</p>
+                <p className="text-white/80 text-xs capitalize mt-1">{item.category}</p>
+              </div>
             </div>
           </div>
-          <div className="p-3">
-            <p className="text-sm text-text font-body">{item.caption}</p>
-            <p className="text-xs text-text-secondary mt-1 capitalize font-body">{item.category}</p>
-          </div>
-        </div>
+        </button>
       ))}
     </div>
   );
 };
+
+const GalleryTile = ({
+  item,
+  onImageClick,
+}: {
+  item: GalleryItem;
+  onImageClick: (item: GalleryItem) => void;
+}) => (
+  <button
+    type="button"
+    onClick={() => onImageClick(item)}
+    className="card-light overflow-hidden text-left group focus-visible:ring-2 focus-visible:ring-accent p-0"
+  >
+    <ResponsiveImage src={item.imageSrc} alt={item.caption} aspectClass="aspect-[4/3]" />
+    <div className="p-3">
+      <p className="text-sm font-medium font-body text-ink">{item.caption}</p>
+      <p className="text-xs text-muted capitalize mt-1">{item.category}</p>
+    </div>
+  </button>
+);

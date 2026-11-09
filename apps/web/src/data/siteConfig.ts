@@ -1,5 +1,5 @@
 export const siteConfig = {
-  businessName: 'Multiservicios Muños',
+  businessName: 'Multiservicios Muñoz y Aliga',
   whatsappNumber: '51939397449',
   // TODO: Agregar dirección exacta (calle/jirón/número) cuando el dueño la confirme
   address: 'Huancayo, El Tambo, Junín',

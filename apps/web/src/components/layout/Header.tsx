@@ -1,89 +1,57 @@
-import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Package, Wrench, Image, Users, MessageCircle, Wrench as BrandIcon } from 'lucide-react';
+import { siteConfig } from '../../data/siteConfig';
+import { WhatsAppCTA } from '../ui/WhatsAppCTA';
+
+const navLinks = [
+  { to: '/', label: 'Inicio' },
+  { to: '/productos', label: 'Productos' },
+  { to: '/servicios', label: 'Servicios' },
+  { to: '/galeria', label: 'Galería' },
+  { to: '/nosotros', label: 'Nosotros' },
+  { to: '/contacto', label: 'Contacto' },
+];
 
 export const Header = () => {
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navLinks = [
-    { to: '/', label: 'Inicio', icon: Home },
-    { to: '/productos', label: 'Productos', icon: Package },
-    { to: '/servicios', label: 'Servicios', icon: Wrench },
-    { to: '/galeria', label: 'Galería', icon: Image },
-    { to: '/nosotros', label: 'Nosotros', icon: Users },
-    { to: '/contacto', label: 'Contacto', icon: MessageCircle },
-  ];
-
-  const handleLinkClick = () => {
-    setIsMenuOpen(false);
-  };
 
   return (
-    <header className="bg-background border-b border-border py-4 px-8 sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <BrandIcon className="w-6 h-6 text-primary" />
-          <h1 className="text-lg md:text-xl font-bold font-heading text-text tracking-tight truncate">
-            Multiservicios Muños
-          </h1>
-        </div>
-        
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden text-text text-2xl focus:outline-none"
-          aria-label="Abrir menú"
+    <header className="sticky top-0 z-50 bg-carbon/95 backdrop-blur-md border-b border-border shadow-sm shadow-black/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-3 flex items-center justify-between gap-4">
+        <Link
+          to="/"
+          className="flex items-center gap-2 min-w-0 focus-visible:outline-offset-4 motion-safe:transition-opacity hover:opacity-90"
         >
-          {isMenuOpen ? '✕' : '☰'}
-        </button>
+          <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center text-white font-bold text-sm font-heading shrink-0 shadow-md shadow-accent/25">
+            MM
+          </span>
+          <span className="text-sm sm:text-base font-bold font-heading text-text truncate max-w-[140px] sm:max-w-none">
+            {siteConfig.businessName}
+          </span>
+        </Link>
 
-        {/* Desktop navigation */}
-        <nav className="hidden md:flex gap-6">
-          {navLinks.map((link) => {
-            const Icon = link.icon;
-            return (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`text-sm font-medium transition-colors flex items-center gap-2 ${
-                  location.pathname === link.to
-                    ? 'text-primary font-semibold'
-                    : 'text-text-secondary hover:text-primary'
+        <nav className="hidden lg:flex items-center gap-1" aria-label="Principal">
+          {navLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`px-3 py-2 rounded-lg text-sm font-medium font-body motion-safe:transition-all
+                ${location.pathname === link.to
+                  ? 'text-accent bg-steel/60 shadow-inner'
+                  : 'text-text-secondary hover:text-text hover:bg-steel/30'
                 }`}
-              >
-                <Icon className="w-4 h-4" />
-                {link.label}
-              </Link>
-            );
-          })}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Mobile navigation dropdown */}
-        {isMenuOpen && (
-          <nav className="absolute top-full left-0 right-0 bg-background border-b border-border md:hidden">
-            <div className="flex flex-col px-8 py-4 gap-4">
-              {navLinks.map((link) => {
-                const Icon = link.icon;
-                return (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    onClick={handleLinkClick}
-                    className={`text-sm font-medium transition-colors flex items-center gap-2 ${
-                      location.pathname === link.to
-                        ? 'text-primary font-semibold'
-                        : 'text-text-secondary hover:text-primary'
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </div>
-          </nav>
-        )}
+        <div className="hidden md:flex items-center gap-2 shrink-0">
+          <WhatsAppCTA size="sm" label="WhatsApp" />
+        </div>
+
+        <div className="lg:hidden flex items-center">
+          <WhatsAppCTA size="sm" label="WA" className="!px-3" />
+        </div>
       </div>
     </header>
   );

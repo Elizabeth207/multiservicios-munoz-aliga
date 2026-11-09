@@ -1,43 +1,39 @@
+import { MapPin } from 'lucide-react';
+import { PrimaryButton } from '../ui/PrimaryButton';
+
 export const MapEmbed = () => {
   const handleGetDirections = () => {
-    window.open('https://www.google.com/maps/dir/?api=1&destination=-12.05229,-75.2161', '_blank');
+    window.open('https://www.google.com/maps/dir/?api=1&destination=-12.05229,-75.2161', '_blank', 'noopener,noreferrer');
   };
 
   const handleOpenInMaps = () => {
-    window.open('https://maps.app.goo.gl/8AUnYrobB2BMhGUp9', '_blank');
+    window.open('https://maps.app.goo.gl/8AUnYrobB2BMhGUp9', '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <div className="bg-surface border border-border rounded-lg overflow-hidden shadow-sm">
-      <div className="p-4 border-b border-border">
-        <h2 className="text-2xl font-bold font-heading text-text">Ubicación</h2>
+    <div className="card-light overflow-hidden p-0">
+      <div className="p-6 border-b border-border-light flex items-center gap-2">
+        <MapPin className="w-5 h-5 text-accent" aria-hidden />
+        <h2 className="text-xl font-bold font-heading text-ink">Ubicación</h2>
       </div>
-      <div className="relative">
-        <iframe
-          src="https://www.google.com/maps?q=-12.05229,-75.2161&hl=es&z=16&output=embed"
-          width="100%"
-          height="300"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Mapa de ubicación"
-          className="bg-background"
-        />
-      </div>
-      <div className="p-4 space-y-2">
-        <button
-          onClick={handleGetDirections}
-          className="w-full bg-primary text-background py-2 rounded hover:bg-primary/90 transition-colors font-semibold font-body shadow-lg shadow-primary/20"
-        >
+      <iframe
+        src="https://www.google.com/maps?q=-12.05229,-75.2161&hl=es&z=16&output=embed"
+        width="100%"
+        height="280"
+        style={{ border: 0 }}
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        title="Mapa de ubicación"
+        className="w-full bg-[#eef0f3]"
+      />
+      <div className="p-4 flex flex-col sm:flex-row gap-2">
+        <PrimaryButton className="flex-1" onClick={handleGetDirections}>
           Cómo llegar
-        </button>
-        <button
-          onClick={handleOpenInMaps}
-          className="w-full border border-border text-text-secondary py-2 rounded hover:bg-surface hover:text-text transition-colors font-medium font-body"
-        >
+        </PrimaryButton>
+        <PrimaryButton className="flex-1" variant="ghost" onClick={handleOpenInMaps}>
           Abrir en Maps
-        </button>
+        </PrimaryButton>
       </div>
     </div>
   );
